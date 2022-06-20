@@ -4,6 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="countries.json"></script>
+<script type="text/javascript" src="states.json"></script>
+<script type="text/javascript" src="cities.json"></script>
 
 </head>   
 <body>
@@ -11,16 +13,16 @@
 <h1>Cascading Dropdown Example</h1>
 
 <form name="form1" id="form1" action="/action_page.php">
-Subjects: <select name="subject" id="country">
+Country: <select name="country" id="country">
     <option value="" selected="selected">Select Country</option>
   </select>
   <br><br>
-Topics: <select name="topic" id="topic">
-    <option value="" selected="selected">Please select subject first</option>
+State: <select name="state" id="state">
+    <option value="" selected="selected">Please select country first</option>
   </select>
   <br><br>
-Chapters: <select name="chapter" id="chapter">
-    <option value="" selected="selected">Please select topic first</option>
+City: <select name="city" id="city">
+    <option value="" selected="selected">Please select state first</option>
   </select>
   <br><br>
   <input type="submit" value="Submit">  

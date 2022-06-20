@@ -8,77 +8,136 @@ fetch("http://127.0.0.1:5500/Implemetation/countries.json")
     
     for(i of data){
       var name = i.name
-        country.push(name);
+      var id = i.id
+        country.push({'id':id ,'name':name});
         // document.getElementById("country").innerHTML = country;
         // console.log(areas);
         // console.log(i.name);
     }
 })
-
-console.log(country);
-
-
+// console.log(country);
 var countryObject = country;
-console.log(countryObject);
+// console.log("countryObject",countryObject);
+// ...............................................................................................................
 
-  // 1:{},
-  // 2:{},
-  // 3:{},
-  // 4:{},
+var states = [];
+fetch("http://127.0.0.1:5500/Implemetation/states.json")
+.then(response => {
+   return response.json();
+})
+.then(data1 => {
+    
+    for(i of data1){
+      var name = i.name
+      var cname = i.country_name
+      states.push({'name':name, 'cname':cname});
+       
+    }
+})
+// console.log("states", states);
+var stateObject = states;
+// console.log("satteObject", stateObject);
 
-  // "Front-end": {
-  //   "HTML": ["Links", "Images", "Tables", "Lists"],
-  //   "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
-  //   "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]    
-  // },
-  // "Back-end": {
-  //   "PHP": ["Variables", "Strings", "Arrays"],
-  //   "SQL": ["SELECT", "UPDATE", "DELETE"]
-  // }
+// ............................................................................................................
+
+
+var cities = [];
+fetch("http://127.0.0.1:5500/Implemetation/cities.json")
+.then(response => {
+   return response.json();
+})
+.then(data2 => {
+    
+    for(i of data2){
+      var name = i.name
+      var sname = i.state_name
+      cities.push({'name':name, 'sname':sname});
+       
+    }
+})
+// console.log("cities", cities);
+var cityObject = cities;
+// console.log("cityObject", cityObject);
+// ..............................................................................................................
+
+
+
+
+
 
 
 window.onload = function() {
   var countrySel = document.getElementById("country");
-  var topicSel = document.getElementById("topic");
-  var chapterSel = document.getElementById("chapter");
+  var stateSel = document.getElementById("state");
+  var citySel = document.getElementById("city");
   for (var x in countryObject) {
     
-    countrySel.options[countrySel.options.length] = new Option(countryObject[x], countryObject[x]);
+    countrySel.options[countrySel.options.length] = new Option(countryObject[x].name, countryObject[x].name);
+    
   }
-  countrySel.onchange = function() {
- //empty Chapters- and Topics- dropdowns
- chapterSel.length = 1;
- topicSel.length = 1;
+
+  
+  // debugger
+
+countrySel.onchange = function() {
+ //empty citys- and States- dropdowns
+ citySel.length = 1;
+ stateSel.length = 1;
     //display correct values
-    for (var y in countryObject[this.value]) {
-      topicSel.options[topicSel.options.length] = new Option(y, y);
+    var finalstate = [];
+    console.log("this value country", countrySel.options[countrySel.selectedIndex].value);
+
+
+    // for (i in countryObject){
+      // console.log(countryObject[i].name);
+      for(j in stateObject){
+        // console.log(stateObject[j].name);
+        if(stateObject[j].cname == this.value){
+          
+          finalstate.push(stateObject[j].name);
+          console.log('finalstate',finalstate);
+      }
+      }
+    // }
+    
+      console.log('true for states')
+      console.log("this value of country name", this.value);
+      for (var y in finalstate) {
+        // console.log(stateObject[y].name);
+        stateSel.options[stateSel.options.length] = new Option(finalstate[y],finalstate[y]);
     }
+
   }
-  topicSel.onchange = function() {
- //empty Chapters dropdown
- chapterSel.length = 1;
-    //display correct values
-    var z = countryObject[countrySel.value][this.value];
-    for (var i = 0; i < z.length; i++) {
-      chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+  stateSel.onchange = function() {
+ //empty citys dropdown
+ citySel.length = 1;
+ var finalcity = [];
+ console.log("this value state", stateSel.options[stateSel.selectedIndex].value);
+ for(k in cityObject){
+  // console.log(stateObject[j].name);
+  if(cityObject[k].sname == this.value){
+    
+    finalcity.push(cityObject[k].name);
+    // console.log(finalcity);
+}
+}
+console.log('true for cities')
+      console.log("this value of state name", this.value);
+      for (var z in finalcity) {
+        console.log('finalcity',finalcity);
+        console.log(cityObject);
+        citySel.options[citySel.options.length] = new Option(finalcity[z], finalcity[z]);
     }
+    
+    //display correct values
+
+
+
+
+    // var z = countryObject[countrySel.value][this.value];
+    // for (var i = 0; i < z.length; i++) {
+    //   citySel.options[citySel.options.length] = new Option(z[i], z[i]);
+    // }
   }
 }
 
-// function readTextFile(file, callback) {
-//     var rawFile = new XMLHttpRequest();
-//     rawFile.overrideMimeType("application/json");
-//     rawFile.open("GET", file, true);
-//     rawFile.onreadystatechange = function() {
-//         if (rawFile.readyState === 4 && rawFile.status == "200") {
-//             callback(rawFile.responseText);
-//         }
-//     }
-//     rawFile.send(null);
-// }
-
-// //usage:
-// readTextFile("/countries.json", function(text){
-//     var data = JSON.parse(text);
-//     console.log(data);
-// });

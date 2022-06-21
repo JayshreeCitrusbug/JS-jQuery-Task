@@ -1,0 +1,200 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="datatable3.json"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"> -->
+    <link rel="stylesheet" type="text/css"
+        href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
+
+    <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> -->
+    <style>
+        .fixTableHead thead th {
+          position: sticky;
+          top: 0;
+          background: rgb(114, 159, 228) ;
+        }
+        th{
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fixTableHead">
+    <table id="table" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th align="left" data-column="ID" data-order="desc">ID</th>
+                <th align="left" data-column="Age" data-order="desc">Age</th>
+                <th align="left" data-column="Gender" data-order="desc">Gender</th>
+                <th align="left" data-column="Grade" data-order="desc">Grade</th>
+                <th align="left" data-column="Employed" data-order="desc">Employed</th>
+            </tr>
+        </thead>
+        <!-- <tfoot>
+            <tr>
+                <th align="left"><h3>ID</h3></th>
+                <th align="left"><h3>Age</h3></th>
+                <th align="left"><h3>Gender</h3></th>
+                <th align="left"><h3>Grade</h3></th>
+                <th align="left"><h3>Employed</h3></th>
+            </tr>
+        </tfoot> -->
+    </table>
+</div>
+    <script type="text/javascript" charset="utf8"
+        src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+
+    <script>
+        var fdata = []
+        $("#table tr:lt(10) input[type=text]"),
+        $(document).ready(function () {
+            
+            $.getJSON("datatable3.json",
+            
+                function (data) {
+                    for(i of data){
+                        fdata.push(i)
+                    console.log(i.Age)
+                    }
+                    fdata.sort(function(a,b){
+                        return(a.Age - b.Age)
+                        
+                    })
+                    console.log('fdata',fdata)
+                    var student = '';
+
+                    // ITERATING THROUGH OBJECTS
+                    $.each(data, function (key, value) {
+                        $("#table tr:lt(10) input[type=text]")
+
+                        // DATA FROM JSON OBJECT
+                        student += '<tr>';
+                        student += '<td>' +
+                            value.Student_id + '</td>';
+
+                        student += '<td>' +
+                            value.Age + '</td>';
+
+                        student += '<td>' +
+                            value.Gender + '</td>';
+
+                        student += '<td>' +
+                            value.Grade + '</td>';
+
+                        student += '<td>' +
+                            value.Employed + '</td>';
+
+                        student += '</tr>';
+                        
+                    });
+
+                    //INSERTING ROWS INTO TABLE 
+                    var table = $('#table').append(student);
+                //         searching: false,
+                //         paging: false,
+                //         ordering: false,
+                       
+                //     data: $('#table').append(student),
+                //     columns: [
+                //             { data: 'Student_id'},
+                //             { data: 'Age' },
+                //             { data: 'Gender'},
+                //             { data: 'Grade'},
+                //             { data: 'Employed' }
+                //     ]
+                // });
+            });
+       
+
+        // $('th').on( 'click', function () {
+        //     var column = $(this).data('column')
+        //     var order = $(this).data('order')
+
+        //     console.log("column was clicked", column, order);
+
+        //     if(order == 'desc'){
+        //         $(this).data('order', "asc")
+                
+        //         data = data.sort((a,b) => a[column] > b[column] ? 1 : 
+        //         -1)
+        //     }
+        //     else{
+        //         $(this).data('order', "desc")
+        //         data = data.sort((a,b) => a[column] < b[column] ? 1 : 
+        //         -1)
+        //     }
+        // } );
+ 
+    });
+
+        $('#next').on( 'click', function () {
+        table.page( 'next' ).draw( 'page' );
+        } );
+ 
+        $('#previous').on( 'click', function () {
+        table.page( 'previous' ).draw( 'page' );
+        } );
+    
+    </script>
+
+    <!-- <script>
+        var student = [];
+        fetch("http://127.0.0.1:5500/datatable3.json")
+        .then(response => {
+   return response.json();
+})
+.then(data => {
+    
+    for(var i of data){
+      // var id = i.Student_id;
+      // var data = i.Grade
+      student.push(i);
+    }
+});
+
+var jsonData = student;
+console.log(jsonData);
+
+
+function createTable(jsonData){ 
+  $(document).ready(function(){
+   $('#table').dataTable({
+     data: jsonData,
+     columns: [
+       { data: 'Student_id'},
+       { data: 'Age' },
+       { data: 'Gender'},
+       { data: 'Grade'},
+       { data: 'Employed' }
+     ]
+   });
+  });
+ }
+
+ createTable(jsonData); -->
+    <!-- //   function assignToEventsColumns(data) {
+//     var table = $('#table').dataTable({
+//         "bAutoWidth" : false,
+//         "aaData" : data.data,
+//         "columns" : [ {
+//             "data" : "Student_id"
+//         }, {
+//             "data" : "Age"
+//         }, {
+//             "data" : "Gender"
+//         }, {
+//             "data" : "Grade"
+//         }, {
+//             "data" : "Employed"
+//         } ]
+//     })
+// }; -->
+
+</body>
+
+</html>

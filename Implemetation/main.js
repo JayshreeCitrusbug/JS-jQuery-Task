@@ -95,7 +95,7 @@ countrySel.onchange = function() {
         if(stateObject[j].cname == this.value){
           
           finalstate.push(stateObject[j].name);
-          console.log('finalstate',finalstate);
+          // console.log('finalstate',finalstate);
       }
       }
     // }
@@ -124,16 +124,11 @@ countrySel.onchange = function() {
 console.log('true for cities')
       console.log("this value of state name", this.value);
       for (var z in finalcity) {
-        console.log('finalcity',finalcity);
-        console.log(cityObject);
+        // console.log('finalcity',finalcity);
         citySel.options[citySel.options.length] = new Option(finalcity[z], finalcity[z]);
     }
     
-    //display correct values
-
-
-
-
+    
     // var z = countryObject[countrySel.value][this.value];
     // for (var i = 0; i < z.length; i++) {
     //   citySel.options[citySel.options.length] = new Option(z[i], z[i]);

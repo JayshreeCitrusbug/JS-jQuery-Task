@@ -10,20 +10,20 @@
 </head>   
 <body>
 
-<h1>Cascading Dropdown Example</h1>
+<h1>Nested choices Task</h1>
 
-<form name="form1" id="form1" action="/action_page.php">
+<form name="form1" id="form1" action="#">
 Country: <select name="country" id="country">
-    <option value="" selected="selected">Select Country</option>
-  </select>
+          <option value="" selected="selected">Select Country</option>
+        </select>
   <br><br>
 State: <select name="state" id="state">
-    <option value="" selected="selected">Please select country first</option>
-  </select>
+        <option value="" selected="selected">Please select country first</option>
+      </select>
   <br><br>
 City: <select name="city" id="city">
-    <option value="" selected="selected">Please select state first</option>
-  </select>
+        <option value="" selected="selected">Please select state first</option>
+      </select>
   <br><br>
   <input type="submit" value="Submit">  
 </form>

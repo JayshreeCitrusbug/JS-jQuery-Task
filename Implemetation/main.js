@@ -1,6 +1,6 @@
 
 var country = [];
-fetch("http://127.0.0.1:5500/Implemetation/countries.json")
+fetch("http://127.0.0.1:5500/countries.json")
 .then(response => {
    return response.json();
 })
@@ -21,7 +21,7 @@ var countryObject = country;
 // ...............................................................................................................
 
 var states = [];
-fetch("http://127.0.0.1:5500/Implemetation/states.json")
+fetch("http://127.0.0.1:5500/states.json")
 .then(response => {
    return response.json();
 })
@@ -42,7 +42,7 @@ var stateObject = states;
 
 
 var cities = [];
-fetch("http://127.0.0.1:5500/Implemetation/cities.json")
+fetch("http://127.0.0.1:5500/cities.json")
 .then(response => {
    return response.json();
 })
